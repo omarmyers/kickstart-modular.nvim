@@ -6,8 +6,9 @@ return {
     config = function()
       require('catppuccin').setup {
         flavour = 'mocha',
+        transparent_background = true,
       }
-      -- vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
   {
@@ -40,7 +41,7 @@ return {
     'rose-pine/neovim',
     name = 'rose-pine-moon',
     config = function()
-      vim.cmd.colorscheme 'rose-pine-moon'
+      -- vim.cmd.colorscheme 'rose-pine-moon'
     end,
   },
   { -- You can easily change to a different colorscheme.

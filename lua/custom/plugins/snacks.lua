@@ -15,7 +15,7 @@ return {
         enabled = true,
         timeout = 3000,
       },
-      picker = { 
+      picker = {
         enabled = true,
         sources = {
           explorer = {
