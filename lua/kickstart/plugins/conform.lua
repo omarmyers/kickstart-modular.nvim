@@ -1,3 +1,6 @@
+-- Global configuration
+vim.g.formatting_enabled = true
+
 return {
   { -- Autoformat
     'stevearc/conform.nvim',
@@ -12,10 +15,25 @@ return {
         mode = '',
         desc = '[F]ormat buffer',
       },
+      {
+        '<leader>uf',
+        function()
+          vim.g.formatting_enabled = not vim.g.formatting_enabled
+          local status = vim.g.formatting_enabled and 'enabled' or 'disabled'
+          vim.notify('Formatting ' .. status, vim.log.levels.INFO, { title = 'Conform' })
+        end,
+        mode = '',
+        desc = '[U]se [F]ormat',
+      },
     },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        -- Return nil if formatting is disabled
+        if not vim.g.formatting_enabled then
+          return nil
+        end
+
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
@@ -37,7 +55,7 @@ return {
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
         typescriptreact = { 'prettierd', 'prettier', stop_after_first = true },
         javascriptreact = { 'prettierd', 'prettier', stop_after_first = true },
